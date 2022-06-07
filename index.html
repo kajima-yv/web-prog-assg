@@ -5,25 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css">
-    <title>song lyrics</title>
+    <title>Go To! Lyrics</title>
   </head>
+  
   <body>
-    <header>
-      <h1>Lyrics Search</h1>
+    <form id="form" action="" class="search-bar">
+      <input
+        type="text"
+        id="search"
+        pattern=".*\S.*" required
+      />
+      <button class="search-btn" type="submit">
+        <span>Search</span>
+      </button>
+    </form>
 
-      <form id="form">
-        <input
-          type="text"
-          id="search"
-          placeholder="Enter artist or song name..."
-        />
-        <button>Search</button>
-      </form>
-    </header>
 
-    <div id="result" class="container">
-        <p>Result will be displayed here</p>
-    </div>
+    <div id="result" class="container centered"></div>
     <div id="more" class="container centered"></div>
     <script src="script.js"></script>
   </body>
