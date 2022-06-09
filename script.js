@@ -1,10 +1,11 @@
+// setting up variabel and functions for API use.
 const from = document.getElementById("form");
 const search = document.getElementById("search");
 const result = document.getElementById("result");
-const more = document.getElementById("more");
 
 const apiURL = "https://api.lyrics.ovh";
 
+// fetching artist & title data from API
 async function searchSongs(term) {
   const res = await fetch(`${apiURL}/suggest/${term}`);
   const data = await res.json();
@@ -12,44 +13,23 @@ async function searchSongs(term) {
   showData(data);
 }
 
+// showing most relevant data based on searched keyword through lists
 function showData(data) {
   result.innerHTML = `
   <ul class="songs">
     ${data.data
       .map(
         (song) => `<li>
-    <span><strong>${song.artist.name}</strong> - ${song.title}</span>
     <button class="btn" data-artist="${song.artist.name}" data-songtitle="${song.title}">Get Lyrics</button>
+    <span class="artist-title"><strong>${song.artist.name}</strong> - ${song.title}</span>
   </li>`
       )
       .join("")}
   </ul>
  `;
-  if (data.prev || data.next) {
-    more.innerHTML = `
-      ${
-        data.prev
-          ? `<button class="btn" onclick="getMoreSongs('${data.prev}')">Prev</button>`
-          : ""
-      }
-      ${
-        data.next
-          ? `<button class="btn" onclick="getMoreSongs('${data.next}')">Next</button>`
-          : ""
-      }
-    `;
-  } else {
-    more.innerHTML = "";
-  }
 }
 
-async function getMoreSongs(url) {
-  const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
-  const data = await res.json();
-
-  showData(data);
-}
-
+// fetching lyrics and showing it
 async function getLyrics(artist, songTitle) {
   const res = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
   const data = await res.json();
@@ -60,14 +40,16 @@ async function getLyrics(artist, songTitle) {
     const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, "<br>");
 
     result.innerHTML = `
-              <h2><strong>${artist}</strong> - ${songTitle}</h2>
+              <div>
+              <h2><strong>${songTitle}</strong></h2>
+              <h3>${artist}</h3>
               <span>${lyrics}</span>
+              </div>
           `;
   }
-
-  more.innerHTML = "";
 }
 
+// submiting keywords in search bar
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -91,3 +73,23 @@ result.addEventListener("click", (e) => {
     getLyrics(artist, songTitle);
   }
 });
+
+
+// styling for the search-box
+// When the user scrolls the page, execute myFunction
+/*window.onscroll = function() {myFunction()};*/
+
+// Get the navbar
+/*var searchbox = document.getElementById("form");*/
+
+// Get the offset position of the navbar
+/*var sticky = searchbox.offsetTop;*/
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+/*function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    searchbox.classList.add("sticky")
+  } else {
+    searchbox.classList.remove("sticky");
+  }
+}*/
