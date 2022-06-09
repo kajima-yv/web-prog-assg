@@ -8,6 +8,11 @@
   font-size: calc(16px + (24 - 16)*(100vw - 320px)/(1920 - 320));
 }
 
+h1 {
+  margin-top: 10ex;
+  text-align: center;
+}
+
 /*search box styling*/
 body, button, input {
   font: 1em Hind, sans-serif;
@@ -232,7 +237,7 @@ div {
 }
 
 .container {
-  margin: 30px auto;
+  margin: 10px auto;
   max-width: 100%;
   width: 500px;
 }
@@ -259,20 +264,31 @@ div {
   font-size: smaller;
 }
 
-/*footer styling*/
 
-
-.foot{
-  background-color: #2e2e2e;
-  grid-auto-flow: row;
-  margin: auto;
-  width: auto;
-  list-style: none;
-  padding-top: 5px;
-  text-align: center;
-  justify-content: center;
+/*animation*/
+h1{
+  color: #484848;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: monospace;
+  letter-spacing: 7px;
+  cursor: default;
 }
-
-a {
-  color: white;
+h1 span{
+  transition: .5s linear
+}
+h1:hover span:nth-child(1){
+  margin-right: 5px
+}
+h1:hover span:nth-child(1):after{
+ 
+}
+h1:hover span:nth-child(2){
+  margin-left: 30px
+}
+h1:hover span{
+  color: #fff;
+  text-shadow: 0 0 10px #fff,
+               0 0 20px #fff, 
+               0 0 40px #fff;
 }
